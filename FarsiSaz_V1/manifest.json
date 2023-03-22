@@ -1,0 +1,11 @@
+{
+  "name": "FarsiSaz_V1",
+  "id": "1220369779073887061",
+  "api": "1.0.0",
+  "main": "code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": [
+    "figma"
+  ]
+}
