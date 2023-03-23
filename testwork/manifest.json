@@ -1,0 +1,11 @@
+{
+  "name": "testwork",
+  "id": "1220372598250492763",
+  "api": "1.0.0",
+  "main": "code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": [
+    "figma"
+  ]
+}
