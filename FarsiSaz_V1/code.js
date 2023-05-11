@@ -1,4 +1,15 @@
-main();
+figma.showUI(__html__);
+figma.ui.resize(500,500)
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+var reversenode=false;
+var textAlignHorizontal=false;
+figma.ui.onmessage=pluginMessage=>{
+  textAlignHorizontal=pluginMessage.textAlignHorizontal;
+  reversenode=pluginMessage.reversenode;
+  
+  main()
+}
 function main()
 {
   //شی هایی که انتخاب شده را در این متغییر ذخیره میکنیم
@@ -16,8 +27,10 @@ function main()
       //شی ها به ترتیب در هر چرخش ذخیره میشوند
       const node = selections;
       //تابع جا به جا کننده لایه ها فراخوانی میشود
+      if(reversenode==true)
       reverseChildren(node);
       //تابع جا به جا کننده تراز متن فراخوانی میشود
+      if(textAlignHorizontal==true)
       reverseTextAlignHorizontal(node);
     }
   }

@@ -1,0 +1,19 @@
+{
+  "name": "FarsiSaz_UI_V1",
+  "version": "1.0.0",
+  "description": "Your Figma Plugin",
+  "main": "code.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "npm run build -- --watch"
+  },
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.62.0",
+    "typescript": "*"
+  },
+  "dependencies": {
+    "bootstrap": "^5.2.3"
+  }
+}

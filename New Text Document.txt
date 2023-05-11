@@ -1,0 +1,59 @@
+<script src="/code.js"></script>
+	<script>
+		function sendData() {
+			var textalingValue = document.querySelector('input[name="textaling"]').checked;
+			var autolayoutValue = document.querySelector('input[name="autolayout"]').checked;
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					alert("اطلاعات با موفقیت ارسال شد.");
+				}
+			};
+			xhttp.open("POST", "your_script_url_here", true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.send("textaling=" + option1Value + "&autolayout=" + option2Value);
+		}
+	</script>
+
+<script>
+document.getElementById('convert').onclick = () => {
+  const textbox = document.getElementById('count');
+  const count = parseInt(textbox.value, 10);
+  parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
+}
+
+document.getElementById('cancel').onclick = () => {
+  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
+}
+
+
+<head></head>
+<body>
+<h2>فارسی ساز</h2>
+<input type="checkbox" id="textaling" value="تراز متن">تراز متن<br>
+	<input type="checkbox" id="autolayout" value="چینش">چینش<br><br>
+<button onclick="sendData()">ارسال</button>
+
+
+
+function sendData() {
+  var yes = document.getElementById("textaling");
+  var no = document.getElementById("autolayout");
+  if (yes.checked == true && no.checked == true){
+    return document.getElementById("error").innerHTML = "Please mark only one checkbox either Yes or No";
+  }
+  else if (yes.checked == true){
+    var y = document.getElementById("autolayout").value;
+    return document.getElementById("result").innerHTML = y; 
+  } 
+  else if (no.checked == true){
+    var n = document.getElementById("textaling").value;
+    return document.getElementById("result").innerHTML = n;
+  }
+  else {
+    return document.getElementById("error").innerHTML = "*Please mark any of checkbox";
+  }
+}
+
+
+
