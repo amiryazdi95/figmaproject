@@ -2,7 +2,7 @@
   "name": "FarsiSaz_UI_V1",
   "id": "1226554585390355175",
   "api": "1.0.0",
-  "main": "code.js",
+  "main": "mycode.js",
   "capabilities": [],
   "enableProposedApi": false,
   "editorType": [
