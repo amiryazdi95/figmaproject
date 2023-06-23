@@ -4,18 +4,13 @@ figma.showUI(__html__);
 var reversenode=false;
 
 var textAlignHorizontal=false;
-//
+////
 figma.ui.onmessage=pluginMessage=>{
   textAlignHorizontal=pluginMessage.textAlignHorizontal;
   reversenode=pluginMessage.reversenode;
   
   main()
 }
-
-
-
-
-
 function main()
 {
   //شی هایی که انتخاب شده را در این متغییر ذخیره میکنیم
