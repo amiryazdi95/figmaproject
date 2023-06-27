@@ -1,5 +1,5 @@
 {
-  "name": "FarsiSaz_UI_V1",
+  "name": "farsisaz_ui_v1",
   "version": "1.0.0",
   "description": "Your Figma Plugin",
   "main": "code.js",
@@ -8,12 +8,15 @@
     "watch": "npm run build -- --watch"
   },
   "author": "",
-  "license": "",
+  "license": "ISC",
   "devDependencies": {
     "@figma/plugin-typings": "^1.62.0",
+    "@types/node": "^20.3.2",
     "typescript": "*"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "bootstrap": "^5.2.3"
-  }
+  },
+  "keywords": []
 }

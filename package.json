@@ -1,0 +1,12 @@
+{
+  "name": "figmaproject",
+  "version": "1.0.0",
+  "description": "figma plugin project\r http://figma.com/plugin-docs/api/FrameNode/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

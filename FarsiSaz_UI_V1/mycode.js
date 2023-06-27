@@ -1,16 +1,25 @@
+
+
 //نمایش صفحه رابط کاربری
 figma.showUI(__html__);
+
 //وضعیت فعال بودن حالات مورد نظر
 var reversenode=false;
-
 var textAlignHorizontal=false;
+var targetlanguage="";
+var translate=false;
+
+var resultdata="";
 ////
-figma.ui.onmessage=pluginMessage=>{
+figma.ui.onmessage=pluginMessage=>
+{
   textAlignHorizontal=pluginMessage.textAlignHorizontal;
   reversenode=pluginMessage.reversenode;
-  
+  translate=pluginMessage.translatetext;
+  targetlanguage=pluginMessage.targetlanguage;
   main()
 }
+
 function main()
 {
   //شی هایی که انتخاب شده را در این متغییر ذخیره میکنیم
@@ -33,6 +42,9 @@ function main()
       //تابع جا به جا کننده تراز متن فراخوانی میشود
       if(textAlignHorizontal==true)
       reverseTextAlignHorizontal(node);
+
+      if(translate==true)
+      translatetext(node)
     }
   }
 }
@@ -94,10 +106,7 @@ function reverseChildren(node) {
     if(child.layoutMode==="HORIZONTAL") 
     { 
       // بررسی اینکه آیا نوع این فرزند GROUP یا FRAME یا COMPONENT یا INSTANCE است یا نه
-      if(child.type === "GROUP" ||
-         child.type === "FRAME" ||
-         child.type === "COMPONENT" ||
-         child.type === "INSTANCE") 
+      if(haschild(child)) 
       {
         // اگر شرایط بالا برقرار بود، فراخوانی تابع reverseChildren برای برعکس کردن فرزندان این فرزند
         reverseChildren(child); 
@@ -137,16 +146,16 @@ function reverseTextAlignHorizontal(node)
         text.textAlignHorizontal="RIGHT";
         else if( text.textAlignHorizontal==="RIGHT")
         text.textAlignHorizontal="LEFT";
+
+      
+        
       })()
     }
     // بررسی اینکه آیا حالت layoutMode این فرزند HORIZONTAL است یا نه
     if(child.layoutMode==="HORIZONTAL") 
     { 
       // بررسی اینکه آیا نوع این فرزند GROUP یا FRAME یا COMPONENT یا INSTANCE است یا نه
-      if(child.type === "GROUP" ||
-         child.type === "FRAME" ||
-         child.type === "COMPONENT" ||
-         child.type === "INSTANCE") 
+      if(haschild(child)) 
       {
         // اگر شرایط بالا برقرار بود، فراخوانی تابع reverseTextAlignHorizontal برای برعکس کردن تراز افقی متن‌های فرزندان این فرزند
         reverseTextAlignHorizontal(child); 
@@ -154,3 +163,85 @@ function reverseTextAlignHorizontal(node)
     }
   } 
 }
+
+function translatetext(node)
+{
+  const children = node.children;
+for (const child of children) 
+{
+ 
+  // بررسی اینکه آیا نوع این فرزند TEXT است یا نه
+  if(child.type==="TEXT")
+  {
+    // یک تابع async برای بارگذاری فونت متن اجرا می‌کنیم.
+    (async () => {
+      // دریافت متن
+      const text = child
+      // بارگذاری فونت متن با استفاده از تابع loadFontAsync
+      await figma.loadFontAsync(text.fontName)
+
+     // text.characters=result_of_translate(text.characters,"auto",targetlanguage);
+     var text_for_translate=text.characters
+     var langAbbreviation=targetlanguage_to_Abbreviation(targetlanguage)
+     var s= sendRequestToGoogle(text_for_translate,"auto",langAbbreviation)
+      text.characters=(await s)
+      
+    })()
+
+  }
+  // بررسی اینکه آیا نوع این فرزند GROUP یا FRAME یا COMPONENT یا INSTANCE است یا نه
+  if(haschild(child)) 
+    {
+      // اگر شرایط بالا برقرار بود، فراخوانی تابع reverseTextAlignHorizontal برای برعکس کردن تراز افقی متن‌های فرزندان این فرزند
+      translatetext(child); 
+    }
+}
+}
+
+function haschild(child)
+{
+    if(child.type === "GROUP" ||
+    child.type === "FRAME" ||
+    child.type === "COMPONENT" ||
+    child.type === "INSTANCE") 
+    {
+      return true;
+    }
+}
+
+
+async function sendRequestToGoogle(word,sourceLang,targetLang)
+  {
+    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&dt=bd&dj=1&q=${encodeURIComponent(
+    word
+  )}`;
+
+    let result = await fetch(url);
+  
+    let resultdata = await result.json();
+    let textsum="";
+   resultdata.sentences.forEach(element => {
+    textsum+=element['trans']
+   });
+  
+    return textsum;
+  }
+
+ function targetlanguage_to_Abbreviation(lang)
+ {
+  let Abbreviation;
+  switch(lang) {
+    case "فارسی":
+      Abbreviation="fa"
+      break;
+    case "العربیه":
+      Abbreviation="ar"
+      break;
+      case "English":
+        Abbreviation="en"
+        break;
+    default:
+      Abbreviation="fa"
+  }
+  return Abbreviation;
+ }

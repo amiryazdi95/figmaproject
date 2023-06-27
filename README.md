@@ -13,3 +13,5 @@ https://www.figma.com/plugin-docs/api/figma-parameters
 https://www.figma.com/plugin-docs/debugging/
 
 https://www.figma.com/plugin-docs/editing-properties
+
+https://www.freecodecamp.org/news/web-scraping-in-javascript-with-puppeteer/
