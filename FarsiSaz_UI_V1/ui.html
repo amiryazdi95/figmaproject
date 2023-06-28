@@ -57,7 +57,7 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
       <input class="form-check-input" type="checkbox"  id="translate">
       <label class="form-check-label" for="flexSwitchCheckDefault">ترجمه متن</label>
     </div>
-    <div id="myCombo" style="width:100px;height:20px;"></div>
+    <div id="langcombo" style="width:100px;height:20px;"></div>
 <!--
     <div class="container">                                       
       <div class="dropdown">
@@ -100,16 +100,16 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
     });
   });
 */    let val='';
-      let mycombo=Combo.New(document.getElementById('myCombo'));
-      mycombo.options(
+      let langcombo=Combo.New(document.getElementById('langcombo'));
+      langcombo.options(
         [
          'فارسی',
          'العربیه',
          'English'
         ]);
-      mycombo.value='فارسی'
-      mycombo.onchange=function(e, combo) {
-      val=combo.value;
+        langcombo.value='فارسی'
+        langcombo.onchange=function(e, combo) {
+        val=combo.value;
         // let val=this.value; // same as above
        
       }
@@ -118,7 +118,7 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
         
 
       
-        const targetlanguage= mycombo.value;
+        const targetlanguage= langcombo.value;
         const textAlignHorizontal=document.getElementById('textAlignHorizontal').checked;
         const reversenode=document.getElementById('reverse-node').checked;
         const translatetext=document.getElementById('translate').checked;

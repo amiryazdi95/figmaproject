@@ -8,9 +8,8 @@ var reversenode=false;
 var textAlignHorizontal=false;
 var targetlanguage="";
 var translate=false;
-
 var resultdata="";
-////
+
 figma.ui.onmessage=pluginMessage=>
 {
   textAlignHorizontal=pluginMessage.textAlignHorizontal;
